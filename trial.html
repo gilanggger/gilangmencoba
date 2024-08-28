@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Laporan Belanja Bulanan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="title">Dashboard Laporan Belanja Bulanan</div>
+        <nav>
+            <a href="#">Beranda</a>
+            <a href="#">Laporan Tahunan</a>
+            <a href="#">Pengaturan</a>
+        </nav>
+    </header>
+    <div class="container">
+        <aside>
+            <ul>
+                <li><a href="#">Ringkasan Bulanan</a></li>
+                <li><a href="#">Grafik Pengeluaran</a></li>
+                <li><a href="#">Detail Pengeluaran</a></li>
+                <li><a href="#">Pengeluaran per Departemen</a></li>
+                <li><a href="#">Pengeluaran per Kategori</a></li>
+            </ul>
+        </aside>
+        <main>
+            <section class="ringkasan">
+                <h2>Ringkasan Bulanan</h2>
+                <p>Total Pengeluaran: Rp xx.xxx.xxx</p>
+                <p>Perbandingan dengan bulan sebelumnya: +5%</p>
+                <p>Kategori Pengeluaran Terbesar: Operasional</p>
+            </section>
+            <section class="grafik">
+                <h2>Grafik Pengeluaran</h2>
+                <div>
+                    <canvas id="barChart"></canvas>
+                </div>
+                <div>
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </section>
+            <section class="detail">
+                <h2>Detail Pengeluaran</h2>
+                <div class="filters">
+                    <label for="departemen">Departemen:</label>
+                    <select id="departemen">
+                        <option value="all">Semua</option>
+                        <!-- Tambahkan opsi departemen di sini -->
+                    </select>
+                    <label for="kategori">Kategori:</label>
+                    <select id="kategori">
+                        <option value="all">Semua</option>
+                        <!-- Tambahkan opsi kategori di sini -->
+                    </select>
+                    <label for="tanggal">Tanggal:</label>
+                    <input type="date" id="tanggal">
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Departemen</th>
+                            <th>Kategori</th>
+                            <th>Deskripsi</th>
+                            <th>Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data pengeluaran ditambahkan di sini -->
+                    </tbody>
+                </table>
+            </section>
+            <section class="departemen">
+                <h2>Pengeluaran per Departemen</h2>
+                <div>
+                    <canvas id="pieChartDept"></canvas>
+                </div>
+                <div>
+                    <canvas id="barChartDept"></canvas>
+                </div>
+            </section>
+            <section class="kategori">
+                <h2>Pengeluaran per Kategori</h2>
+                <div>
+                    <canvas id="pieChartKategori"></canvas>
+                </div>
+                <div>
+                    <canvas id="barChartKategori"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>Informasi Kontak | Tautan Cepat</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

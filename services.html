@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services - Vue.js Sidebar Navigation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .sidebar {
+      height: 100vh;
+      background-color: #007bff;
+      padding-top: 20px;
+      width: 200px;
+    }
+    .sidebar a {
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      display: block;
+    }
+    .sidebar a:hover {
+      background-color: #0056b3;
+    }
+    .content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+    .submenu a {
+      padding-left: 30px;
+    }
+    .search-box {
+      padding: 15px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="d-flex">
+    <sidebar-component @update-content="updateContent"></sidebar-component>
+    <div class="content" id="main-content">
+      <h1>{{ title }}</h1>
+      <p v-html="content"></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  <script>
+    Vue.component('sidebar-component', {
+      template: `
+        <div class="sidebar">
+          <div class="search-box">
+            <input type="text" v-model="searchInput" placeholder="Search..." @input="filterLinks">
+          </div>
+          <a v-if="filteredLinks.includes('Home')" href="#" @click.prevent="navigateTo('home.html')">Home</a>
+          <div v-if="isSubmenuVisible && filteredLinks.includes('Home')" class="submenu">
+            <a href="#" @click.prevent="navigateTo('analytics.html')">Analytics</a>
+            <a href="#" @click.prevent="navigateTo('cpm.html')">CPM</a>
+          </div>
+          <a href="#" @click.prevent="navigateTo('services.html')" v-if="filteredLinks.includes('Services')">Services</a>
+          <a href="#" @click.prevent="navigateTo('clients.html')" v-if="filteredLinks.includes('Clients')">Clients</a>
+          <a href="#" @click.prevent="navigateTo('contact.html')" v-if="filteredLinks.includes('Contact')">Contact</a>
+        </div>
+      `,
+      data() {
+        return {
+          searchInput: '',
+          isSubmenuVisible: false,
+          links: ['Home', 'Services', 'Clients', 'Contact'],
+          filteredLinks: ['Home', 'Services', 'Clients', 'Contact'],
+        };
+      },
+      methods: {
+        navigateTo(page) {
+          window.location.href = page;
+        },
+        filterLinks() {
+          const filter = this.searchInput.toUpperCase();
+          this.filteredLinks = this.links.filter(link => link.toUpperCase().includes(filter));
+          if (!this.filteredLinks.includes('Home') && this.isSubmenuVisible) {
+            this.isSubmenuVisible = false;
+          }
+        }
+      }
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+        title: 'Services',
+        content: `
+          <p>We offer a variety of services including:</p>
+          <ul>
+            <li>Web Development</li>
+            <li>Mobile App Development</li>
+            <li>Cloud Services</li>
+          </ul>
+        `,
+      }
+    });
+  </script>
+</body>
+</html>
